@@ -6,6 +6,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
@@ -18,6 +19,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
 }
 
@@ -41,7 +43,13 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 24
     }
+}
 
+dependencies {
+    // https://mvnrepository.com/artifact/com.qiniu/android-netdiag
+    implementation 'com.qiniu:android-netdiag:0.1.1'
+//    implementation 'com.synaptic-tools:traceroute:1.0.0'
+//    implementation 'com.wandroid:traceroute-for-android:1.0.0'
 }

@@ -1,15 +1,22 @@
+import 'dart:async';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_traceroute/flutter_traceroute.dart';
 import 'package:flutter_traceroute/flutter_traceroute_platform_interface.dart';
 import 'package:flutter_traceroute/flutter_traceroute_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-class MockFlutterTraceroutePlatform
-    with MockPlatformInterfaceMixin
-    implements FlutterTraceroutePlatform {
+class MockFlutterTraceroutePlatform with MockPlatformInterfaceMixin implements FlutterTraceroutePlatform {
+  @override
+  Future<void> stopTrace() async {}
 
   @override
-  Future<String?> getPlatformVersion() => Future.value('42');
+  Stream<TracerouteStep> trace(TracerouteArgs args) {
+    return StreamController<TracerouteStep>().stream.asBroadcastStream();
+  }
+
+  // @override
+  // Future<String?> getPlatformVersion() => Future.value('42');
 }
 
 void main() {
@@ -20,10 +27,10 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    FlutterTraceroute flutterTraceroutePlugin = FlutterTraceroute();
+    // FlutterTraceroute flutterTraceroutePlugin = FlutterTraceroute();
     MockFlutterTraceroutePlatform fakePlatform = MockFlutterTraceroutePlatform();
     FlutterTraceroutePlatform.instance = fakePlatform;
 
-    expect(await flutterTraceroutePlugin.getPlatformVersion(), '42');
+    // expect(await flutterTraceroutePlugin.getPlatformVersion(), '42');
   });
 }

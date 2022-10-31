@@ -1,8 +1,10 @@
 import 'package:flutter_traceroute/src/models/traceroute_enum.dart';
 import 'package:flutter_traceroute/src/models/traceroute_step.dart';
+import 'package:flutter_traceroute/src/models/transformers/tracestep_transformer.dart';
 
-abstract class TracestepTransformerIOS {
-  static TracerouteStep? transform(Map<String, dynamic> data) {
+class TracestepTransformerIOS implements TracestepTransformer<Map<String, dynamic>> {
+  @override
+  Future<TracerouteStep?> transform(String targetHost, Map<String, dynamic> data) async {
     final typeJson = data['type'];
     final type = TracerouteEnum.values.singleWhere(
       (element) => TraceRouteEnumParser.parseEnum(element) == typeJson,
@@ -11,13 +13,16 @@ abstract class TracestepTransformerIOS {
 
     switch (type) {
       case TracerouteEnum.start:
-        return TracerouteStepStart(data['host'], data['ip'], data['ttl']);
+        final ip = await TracestepTransformer.reverseLookup(data['ip']);
+        return TracerouteStepStart(data['host'], ip, data['ttl'], null);
       case TracerouteEnum.router:
-        return TracerouteStepRouter(data['step'], data['ip'], data['duration']);
+        final ip = await TracestepTransformer.reverseLookup(data['ip']);
+        return TracerouteStepRouter(data['step'], ip, data['duration']);
       case TracerouteEnum.routerDoesNotRespond:
         return TracerouteStepRouterDoesNotRespond(data['step']);
       case TracerouteEnum.finished:
-        return TracerouteStepFinished(data['step'], data['ip'], data['latency']);
+        final ip = await TracestepTransformer.reverseLookup(data['ip']);
+        return TracerouteStepFinished(data['step'], ip, data['latency']);
       case TracerouteEnum.failed:
         return TracerouteStepFailed(data['error']);
       case TracerouteEnum.undefined:

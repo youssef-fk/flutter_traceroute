@@ -6,7 +6,8 @@ import io.flutter.plugin.common.EventChannel
 class TracerouteStreamHandler : EventChannel.StreamHandler {
     var sink: EventChannel.EventSink? = null
 
-    fun sendNewTrace(trace: String) {
+    fun sendNewTrace(trace: String?) {
+        if(trace != null)
         sink?.success(trace)
     }
 

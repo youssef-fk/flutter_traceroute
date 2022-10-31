@@ -53,32 +53,33 @@ class _TraceScreenState extends State<TraceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Traceroute')),
+      appBar: AppBar(title: const Text('Traceroute')),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Input IP address'),
-            SizedBox(height: 16),
+            const Text('Input IP address'),
+            const SizedBox(height: 16),
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'IP address',
                 labelText: 'IP',
               ),
               controller: hostController,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Time to live',
-                labelText: 'TTL',
+                hintText: 'Time to live - iOS Only',
+                labelText: 'TTL - iOS Only',
               ),
+              keyboardType: TextInputType.number,
               controller: ttlController,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -92,8 +93,8 @@ class _TraceScreenState extends State<TraceScreen> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
+            const SizedBox(height: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

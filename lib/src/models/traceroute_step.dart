@@ -8,18 +8,27 @@ abstract class TracerouteStep extends Equatable {
 }
 
 class TracerouteStepStart extends TracerouteStep {
-  TracerouteStepStart(this.host, this.ip, this.ttl);
+  TracerouteStepStart(this.host, this.ip, this.ttl, this.duration, [this._isAndroid = false])
+      : assert(_isAndroid == true && duration != null);
 
   final String host;
   final String ip;
-  final int ttl;
+  final int? duration;
+  final int? ttl;
+  final bool _isAndroid;
 
   @override
   List<Object?> get props => [host, ip, ttl];
 
   @override
   String toString() {
-    return 'Starting traceroute for $host';
+    var str = 'Starting traceroute for $host';
+
+    if (_isAndroid) {
+      str += '\n${TracerouteStepRouter(1, ip, duration!)}';
+    }
+
+    return str;
   }
 }
 

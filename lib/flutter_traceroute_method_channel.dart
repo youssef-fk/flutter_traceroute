@@ -1,10 +1,14 @@
 import 'dart:async';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_traceroute/src/models/traceroute_step.dart';
+import 'package:flutter_traceroute/src/models/transformers/tracestep_transformer.dart';
+import 'package:flutter_traceroute/src/models/transformers/tracestep_transformer_android.dart';
 import 'package:flutter_traceroute/src/models/transformers/tracestep_transformer_ios.dart';
+import 'package:queue/queue.dart';
 
 import 'flutter_traceroute_platform_interface.dart';
 
@@ -25,8 +29,20 @@ class MethodChannelFlutterTraceroute extends FlutterTraceroutePlatform {
   @visibleForTesting
   final traceEventChannel = const EventChannel(traceEventChannelName);
 
+  late final TracestepTransformer tracestepTransformer;
+
+  MethodChannelFlutterTraceroute() {
+    if (Platform.isIOS) {
+      tracestepTransformer = TracestepTransformerIOS();
+    } else if (Platform.isAndroid) {
+      tracestepTransformer = TracestepTransformerAndroid();
+    }
+  }
+
   @override
   Stream<TracerouteStep> trace(TracerouteArgs args) {
+    final queue = Queue();
+
     final stream = traceEventChannel.receiveBroadcastStream();
 
     Future.delayed(Duration.zero).then((value) {
@@ -38,15 +54,16 @@ class MethodChannelFlutterTraceroute extends FlutterTraceroutePlatform {
 
     return stream.transform<TracerouteStep>(
       StreamTransformer<dynamic, TracerouteStep>.fromHandlers(
-        handleData: (data, sink) {
-          TracerouteStep? step;
-          if (Platform.isIOS) {
-            step = TracestepTransformerIOS.transform(Map<String, dynamic>.from(data));
-          }
+        handleData: (data, sink) async {
+          log(data);
 
-          if (step != null) {
-            sink.add(step);
-          }
+          queue.add(() async {
+            final step = await tracestepTransformer.transform(args.host, data);
+
+            if (step != null) {
+              sink.add(step);
+            }
+          });
         },
       ),
     );
