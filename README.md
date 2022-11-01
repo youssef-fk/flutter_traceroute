@@ -1,15 +1,66 @@
-# flutter_traceroute
+# Flutter Traceroute
 
-A new Flutter plugin project.
+A minimalist Flutter plugin for performing **TRACEROUTE**
+Currently supported on *Android* and *IOS*
 
-## Getting Started
+## Limitations
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+• TTL is not supported on Android
+• IOS takes a little more time between steps, not sure what the root cause is
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
 
+### IOS
+
+At the beginning of your **Podfile**, set the ios platform version to `14`
+
+```ruby
+platform :ios, '14.0'
+```
+
+At the end of your **Podfile**, add the following pods
+
+```ruby
+pod 'SimplePing', :git => 'https://github.com/youssef-fk/SimplePing.git'
+pod 'SimpleTracer', :git => 'https://github.com/youssef-fk/SimpleTracer.git'
+```
+
+### Android
+
+Maybe set `minSdkVersion 24`
+
+## Usage
+
+```dart
+const args = TracerouteArgs(
+  host: '8.8.8.8',
+  ttl: 20, // IOS ONLY
+);
+final stream = FlutterTraceroute().trace(args);
+stream.listen((event) {
+  if (event is TracerouteStepStart) {} // ...
+  if (event is TracerouteStepRouter) {} // ...
+  if (event is TracerouteStepRouterDoesNotRespond) {} // ...
+  if (event is TracerouteStepFinished) {} // ...
+  if (event is TracerouteStepFailed) {} // ...
+});
+```
+
+### Objects definitions
+
+| Class | Attributes | Description |
+|-------|------------|------------ |
+|TracerouteStep |-|Base class
+|TracerouteStepStart |String **host**, String **ip**, int **ttl**|Base class
+|TracerouteStepRouter |int **step**, String **ip**, int **duration**|Router jump
+|TracerouteStepRouterDoesNotRespond |int **step**|Jump timeout
+|TracerouteStepFinished |int **step**, String **ip**, int **latency**|End of trace
+|TracerouteStepFailed |String **error**|Trace error
+
+#### Contributing
+
+Pull requests are welcome!
+
+## License
+
+MIT
