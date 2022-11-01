@@ -1,0 +1,42 @@
+PODS:
+  - Flutter (1.0.0)
+  - flutter_traceroute (0.0.1):
+    - Flutter
+    - SimpleTracer
+  - SimplePing (0.1.1)
+  - SimpleTracer (0.1.1):
+    - SimplePing
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - flutter_traceroute (from `.symlinks/plugins/flutter_traceroute/ios`)
+  - SimplePing (from `https://github.com/youssef-fk/SimplePing.git`)
+  - SimpleTracer (from `https://github.com/youssef-fk/SimpleTracer.git`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  flutter_traceroute:
+    :path: ".symlinks/plugins/flutter_traceroute/ios"
+  SimplePing:
+    :git: https://github.com/youssef-fk/SimplePing.git
+  SimpleTracer:
+    :git: https://github.com/youssef-fk/SimpleTracer.git
+
+CHECKOUT OPTIONS:
+  SimplePing:
+    :commit: 5d8706ab38bdc31f774399cd474b2ebd04a44641
+    :git: https://github.com/youssef-fk/SimplePing.git
+  SimpleTracer:
+    :commit: 769aec762882c92f01317a565a263fd99bd448e2
+    :git: https://github.com/youssef-fk/SimpleTracer.git
+
+SPEC CHECKSUMS:
+  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  flutter_traceroute: ce0a0542f93c27751d053e7769644a9fb2b0c46a
+  SimplePing: dbf76d173000aa470f40ea6a0ddbd09778617b07
+  SimpleTracer: fc6d2e75e7a1bcde1600bfcf130a43660bc16826
+
+PODFILE CHECKSUM: 835b1b1eedbceb398be7ef3fb2b00e9df32c788b
+
+COCOAPODS: 1.11.3
