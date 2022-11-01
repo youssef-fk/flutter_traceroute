@@ -48,8 +48,5 @@ android {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/com.qiniu/android-netdiag
     implementation 'com.qiniu:android-netdiag:0.1.1'
-//    implementation 'com.synaptic-tools:traceroute:1.0.0'
-//    implementation 'com.wandroid:traceroute-for-android:1.0.0'
 }

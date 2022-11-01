@@ -68,6 +68,4 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//    implementation 'com.synaptic-tools:traceroute:1.0.0'
-//    implementation 'com.wandroid:traceroute-for-android:1.0.0'
 }

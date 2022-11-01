@@ -5,8 +5,8 @@ Currently supported on *Android* and *IOS*
 
 ## Limitations
 
-• TTL is not supported on Android
-• IOS takes a little more time between steps, not sure what the root cause is
+- TTL is not supported on Android
+- IOS takes a little more time between steps, not sure what the root cause is
 
 ## Installation
 
@@ -59,9 +59,9 @@ stream.listen((event) {
 
 ### Screenshot
 
-![Example screenshot](example/example.jpg)
+![Example screenshot](https://github.com/youssef-fk/flutter_traceroute/blob/main/example/example.jpg?raw=true)
 
-#### Contributing
+## Contributing
 
 Pull requests are welcome!
 
