@@ -27,7 +27,11 @@ pod 'SimpleTracer', :git => 'https://github.com/youssef-fk/SimpleTracer.git'
 
 ### Android
 
+<<<<<<< HEAD
 All set
+=======
+Maybe set `minSdkVersion 24`
+>>>>>>> 753150f3320cd408233ed3e8aa9e19cce96a0b0e
 
 ## Usage
 
