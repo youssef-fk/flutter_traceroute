@@ -63,4 +63,4 @@ Pull requests are welcome!
 
 ## License
 
-MIT
+[MIT](https://github.com/youssef-fk/flutter_traceroute/blob/master/LICENSE)
