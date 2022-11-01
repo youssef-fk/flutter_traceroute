@@ -2,18 +2,19 @@ import 'package:equatable/equatable.dart';
 
 typedef OnTracerouteStep = void Function(TracerouteStep step);
 
+/// Base class
 abstract class TracerouteStep extends Equatable {
   @override
   bool get stringify => true;
 }
 
 class TracerouteStepStart extends TracerouteStep {
-  TracerouteStepStart(this.host, this.ip, this.ttl, this.duration, [this._isAndroid = false])
-      : assert(_isAndroid == true && duration != null);
+  TracerouteStepStart(this.host, this.ip, this.ttl, this._duration, [this._isAndroid = false])
+      : assert(_isAndroid == true && _duration != null);
 
   final String host;
   final String ip;
-  final int? duration;
+  final int? _duration;
   final int? ttl;
   final bool _isAndroid;
 
@@ -25,7 +26,7 @@ class TracerouteStepStart extends TracerouteStep {
     var str = 'Starting traceroute for $host';
 
     if (_isAndroid) {
-      str += '\n${TracerouteStepRouter(1, ip, duration!)}';
+      str += '\n${TracerouteStepRouter(1, ip, _duration!)}';
     }
 
     return str;

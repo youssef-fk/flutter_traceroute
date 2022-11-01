@@ -1,7 +1,7 @@
 name: flutter_traceroute
-description: A new Flutter plugin project.
+description: A minimalist Flutter plugin for performing TRACEROUTE
 version: 0.0.1
-homepage:
+homepage: 
 
 environment:
   sdk: '>=2.18.0 <3.0.0'

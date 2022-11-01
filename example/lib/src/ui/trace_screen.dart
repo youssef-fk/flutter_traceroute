@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_traceroute/flutter_traceroute.dart';
 import 'package:flutter_traceroute/flutter_traceroute_platform_interface.dart';
 
 class TraceScreen extends StatefulWidget {
+  static const defaultDNS = '8.8.8.8';
+
   const TraceScreen({super.key});
 
   @override
@@ -21,7 +25,7 @@ class _TraceScreenState extends State<TraceScreen> {
     super.initState();
 
     traceroute = FlutterTraceroute();
-    hostController = TextEditingController()..text = '10.11.109.1';
+    hostController = TextEditingController()..text = TraceScreen.defaultDNS;
     ttlController = TextEditingController();
   }
 
@@ -69,16 +73,17 @@ class _TraceScreenState extends State<TraceScreen> {
               ),
               controller: hostController,
             ),
-            const SizedBox(height: 16),
-            TextField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Time to live - iOS Only',
-                labelText: 'TTL - iOS Only',
+            if (Platform.isIOS) const SizedBox(height: 16),
+            if (Platform.isIOS)
+              TextField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Time to live - iOS Only',
+                  labelText: 'TTL - iOS Only',
+                ),
+                keyboardType: TextInputType.number,
+                controller: ttlController,
               ),
-              keyboardType: TextInputType.number,
-              controller: ttlController,
-            ),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
