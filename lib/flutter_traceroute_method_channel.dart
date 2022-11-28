@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -55,7 +54,9 @@ class MethodChannelFlutterTraceroute extends FlutterTraceroutePlatform {
     return stream.transform<TracerouteStep>(
       StreamTransformer<dynamic, TracerouteStep>.fromHandlers(
         handleData: (data, sink) async {
-          log(data);
+          if (data is Map) {
+            data = Map<String, dynamic>.from(data);
+          }
 
           queue.add(() async {
             final step = await tracestepTransformer.transform(args.host, data);

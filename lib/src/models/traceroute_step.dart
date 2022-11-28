@@ -9,8 +9,10 @@ abstract class TracerouteStep extends Equatable {
 }
 
 class TracerouteStepStart extends TracerouteStep {
-  TracerouteStepStart(this.host, this.ip, this.ttl, this._duration, [this._isAndroid = false])
-      : assert(_isAndroid == true && _duration != null);
+  TracerouteStepStart(this.host, this.ip, this.ttl, this._duration,
+      [this._isAndroid = false])
+      : assert(_isAndroid == true && _duration != null ||
+            _isAndroid == false && _duration == null);
 
   final String host;
   final String ip;

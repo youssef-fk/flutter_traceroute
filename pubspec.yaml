@@ -1,6 +1,6 @@
 name: flutter_traceroute
-description: A minimalist Flutter plugin for performing TRACEROUTE
-version: 0.0.1+1
+description: A minimalist Flutter plugin for performing TRACEROUTE on Android and iOS using native libraries.
+version: 0.0.1+2
 homepage: https://github.com/youssef-fk/flutter_traceroute/
 
 environment:
@@ -9,6 +9,8 @@ environment:
 
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_web_plugins:
     sdk: flutter
     
   plugin_platform_interface: ^2.0.2
@@ -42,6 +44,9 @@ flutter:
         pluginClass: FlutterTraceroutePlugin
       ios:
         pluginClass: FlutterTraceroutePlugin
+      # web:
+      #   pluginClass: FlutterTracerouteWeb
+      #   fileName: flutter_traceroute_web.dart
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

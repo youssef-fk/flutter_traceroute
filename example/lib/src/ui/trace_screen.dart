@@ -1,8 +1,7 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_traceroute/flutter_traceroute.dart';
 import 'package:flutter_traceroute/flutter_traceroute_platform_interface.dart';
+import 'package:flutter_traceroute_example/src/services/platform_service.dart';
 
 class TraceScreen extends StatefulWidget {
   static const defaultDNS = '8.8.8.8';
@@ -16,6 +15,7 @@ class TraceScreen extends StatefulWidget {
 class _TraceScreenState extends State<TraceScreen> {
   List<TracerouteStep> traceResults = [];
 
+  final platformService = IPlatformService.instance;
   late final FlutterTraceroute traceroute;
   late final TextEditingController hostController;
   late final TextEditingController ttlController;
@@ -73,8 +73,8 @@ class _TraceScreenState extends State<TraceScreen> {
               ),
               controller: hostController,
             ),
-            if (Platform.isIOS) const SizedBox(height: 16),
-            if (Platform.isIOS)
+            if (platformService.isIOS) const SizedBox(height: 16),
+            if (platformService.isIOS)
               TextField(
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
@@ -109,7 +109,9 @@ class _TraceScreenState extends State<TraceScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       height: 1.5,
-                      fontWeight: result is TracerouteStepFinished ? FontWeight.bold : FontWeight.normal,
+                      fontWeight: result is TracerouteStepFinished
+                          ? FontWeight.bold
+                          : FontWeight.normal,
                     ),
                   ),
               ],

@@ -2,9 +2,11 @@ import 'package:flutter_traceroute/src/models/traceroute_enum.dart';
 import 'package:flutter_traceroute/src/models/traceroute_step.dart';
 import 'package:flutter_traceroute/src/models/transformers/tracestep_transformer.dart';
 
-class TracestepTransformerIOS implements TracestepTransformer<Map<String, dynamic>> {
+class TracestepTransformerIOS
+    implements TracestepTransformer<Map<String, dynamic>> {
   @override
-  Future<TracerouteStep?> transform(String targetHost, Map<String, dynamic> data) async {
+  Future<TracerouteStep?> transform(
+      String targetHost, Map<String, dynamic> data) async {
     final typeJson = data['type'];
     final type = TracerouteEnum.values.singleWhere(
       (element) => TraceRouteEnumParser.parseEnum(element) == typeJson,
